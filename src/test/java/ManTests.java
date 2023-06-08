@@ -36,14 +36,14 @@ public class ManTests {
     }
 
     @Description("This test checks if a man IS retired")
-    @Test(description = "Check if a man is retired", dataProvider = "age", dataProviderClass = TestDataProviders.class)
+    @Test(description = "Check if a man is retired", dataProvider = "ageDB", dataProviderClass = TestDataProviders.class)
     public void testIsRetired(int age){
         man = new Man("John", "LastName", age, "LastName", false);
         Assert.assertTrue(man.isRetired(), "Age "+man.getAge()+" is below 65 years");
     }
 
     @Description("This test checks if a partner is changed")
-    @Test(description = "Check if partner is changed", dataProvider = "lastName", dataProviderClass = TestDataProviders.class)
+    @Test(description = "Check if partner is changed", dataProvider = "lastNameDB", dataProviderClass = TestDataProviders.class)
     public void testRegisterPartnershipChanges(String lastName){
         man = new Man("John", lastName, 60, "LastName", false);
         man.registerPartnership(lastName);
