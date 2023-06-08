@@ -1,14 +1,30 @@
 import org.testng.annotations.DataProvider;
 
+
 public class TestDataProviders {
+    private final static String PATH ="src/test/resources/data.csv";
     @DataProvider(name="age")
     public static Object [][] ageDataProvider(){
-        return new Object[][]{{59},{60},{61},{64}, {65}, {66}};
+      return CsvReader.getListObjectsFromCsv(PATH, Data.class).stream().map(age -> new Object[]{age.getAge()})
+              .toArray(Object[][]::new);
+    }
+
+    @DataProvider(name="ageDB")
+    public static Object [][] ageDataProviderDB(){
+        return DBReader.getAgeFromDB().stream().map(age -> new Object[]{age.getAge()})
+                .toArray(Object[][]::new);
     }
 
     @DataProvider(name="lastName")
     public static Object [][] lastNameDataProvider(){
+
         return new Object[][]{{"John"}, {"Brown"}, {null}, {""}};
+    }
+
+    @DataProvider(name="lastNameDB")
+    public static Object [][] lastNameDataProviderDB(){
+        return DBReader.getAgeFromDB().stream().map(lastName -> new Object[]{lastName.getLastName()})
+                .toArray(Object[][]::new);
     }
 
     @DataProvider(name="partnerDivorced")
